@@ -1,6 +1,5 @@
 #pragma once
-#include  "objects.h"
-#include "pch.h" 
+#include "stdafx.h" 
 
 template<typename Data> class list {
 public:
@@ -20,7 +19,6 @@ public:
 		last = nullptr;
 		if (original.first != nullptr) {
 			cell* tmp1 = original.first;
-			cell* tmp2 = original.last;
 			while (tmp1 != nullptr) {
 				addData(tmp1->data);
 				tmp1 = tmp1->next;
@@ -30,6 +28,19 @@ public:
 
   ~list() {
 	  clear();
+  }
+
+  void operator=(const list<Data>& original) {
+    clear();
+    first = nullptr;
+    last = nullptr;
+    if (original.first != nullptr) {
+      cell * tmp = original.first;
+      while (tmp != nullptr) {
+        addData(tmp->data);
+        tmp = tmp->next;
+      }
+    }
   }
 
   struct cell {

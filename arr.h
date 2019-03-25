@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 
 template<typename Data> class Array {
 public:
@@ -129,7 +130,7 @@ public:
 	Data operator[](int ind) {
 		if ((ind < size) && (ind > -1))
 			return *(arr + ind);
-		return -123452;
+		throw 42;
 	};
 private:
 	Data * arr;
