@@ -1,7 +1,7 @@
 #pragma once		
 #include "objects.h"
 #include "hasht.h"
-#include "stdafx.h"
+#include "pch.h"
 
 
 
@@ -27,26 +27,28 @@ enum Figure {
   FI_ARC
 };
 
-#define Id int//Array<char>
+//#define Id Array<char>
 
 class Architect {
 public:
-  Id addElement(double x, double y) {
+  /*Id*/ void addElement(double x, double y) {
     point2 p(x, y);
 		para<point2> pa;
 		pa.ID = LastGiven++;
 		pa.data = p;
     m_Pointstorage.AddData(pa.ID, pa);
+   // return pa.ID;
   };
-  Id addElement(double x, double y, double r, double st, double fi) {
+  /*Id*/ void addElement(double x, double y, double r, double st, double fi) {
     point2 c(x, y);
     arc a(c, r, st, fi);
 		para<arc> pa;
 		pa.ID = LastGiven++;
 		pa.data = a;
 		m_acrstorage.AddData(pa.ID, pa);
+    //return pa.ID;
   };
-  Id addElement(double x1, double y1, double x2, double y2) {
+  /*Id*/ void addElement(double x1, double y1, double x2, double y2) {
     point2 beg(x1, y1);
     point2 end(x2, y2);
     section s(beg, end);
@@ -54,8 +56,9 @@ public:
 		pa.ID = LastGiven++;
 		pa.data = s;
     m_sectionStorage.AddData(pa.ID, pa);
+    //return pa.ID;
   };
-  void deleteElement(const Id& id) {}
+ /* void deleteElement(const Id& id) {}
 
   Array<Id> getALLIds()const {};
   Figure getObjTypeById(const Id& id)const {};
@@ -63,23 +66,20 @@ public:
   Array<Id> getChildIds(const Id&)const {};
 
   void location(Situations s1, const Array<Id> &objects) {};
-
+  */
 
 private:
   template<typename Data> struct para {
-    Id ID;
+    /*Id*/int ID;
     Data data;
   };
-	hasht< Id, para<point2>,hasher<Id>>    m_Pointstorage;
-	hasht< Id, para<section>, hasher<Id> > m_sectionStorage;
-	hasht< Id, 
-		para<arc>, 
-		hasher<Id>>     
-		m_acrstorage;
+	hasht< /*Id*/int, para<point2> >    m_Pointstorage;
+	hasht< /*Id*/int, para<section> > m_sectionStorage;
+	hasht< /*Id*/int, para<arc> >     m_acrstorage;
 
   struct SiInfo {
     Situations si;
-    list<Id> elements;
+    list</*Id*/int> elements;
   };
   list<SiInfo>  m_Situations;
 	static int LastGiven;

@@ -1,5 +1,5 @@
 #pragma once
-#include "stdafx.h"
+#include "pch.h"
 
 template<typename Data> class Array {
 public:
@@ -73,7 +73,7 @@ public:
 		Data operator*() {
 			if (current != nullptr)
 				return *current;
-			return -1;
+      throw 42;
 		};
 		Data& operator=(const Data& data) {
 			*current = data;
@@ -115,7 +115,7 @@ public:
 	};
 	void printArray() {
 		for (size_t i = 0; i < Size(); ++i)
-			cout << *(arr + i) << " ";
+			std::cout << *(arr + i) << " ";
 	};
 	bool isVoid()const {
 		return Size() == 0;

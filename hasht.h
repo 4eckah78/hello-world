@@ -13,9 +13,7 @@ template<typename K> size_t hasher(const K& k) {
 	return res;
 }
 
-template<typename K, 
-	typename V, 
-	typename hasher<K>> 
+template<typename K, 	typename V> 
 	class
 	hasht {
 
@@ -34,7 +32,7 @@ public:
 
 
 	void AddData(const K& k, const V& value) {
-		size_t cellind = hasher()(k); // Aaaaaaa!!
+		/*size_t cellind = hasher()(k); // Aaaaaaa!!
 		cellind %= 256;
 		if (m_Storage[cellind] != nullptr){
 			size_t probe = (cellind + 1) % 256;
@@ -44,7 +42,7 @@ public:
 			throw 42;
 		cellind = probe;
 	}
-	m_Storage.changeValue(cellind, new V(value));
+	m_Storage.changeValue(cellind, new V(value));*/
 }
 
 	/*bool hasK(const K& k)const {
