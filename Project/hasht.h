@@ -6,11 +6,28 @@
 
 
 
+<<<<<<< HEAD
 template<typename K> size_t hasher(const K& k) {
 	size_t res = k & 0xFF;
 	for (int c = 1; c < sizeof(k); ++c)
 		res += (k >> 8) & 0xFF;
 	return res;
+=======
+unsigned int RSHash(const char* str, unsigned int length)
+{
+	unsigned int b = 378551;
+	unsigned int a = 63689;
+	unsigned int hash = 0;
+	unsigned int i = 0;
+
+	for (i = 0; i < length; ++str, ++i)
+	{
+		hash = hash * a + (*str);
+		a = a * b;
+	}
+
+	return hash;
+>>>>>>> e3d2477bddb238d4300694837e31b58c858f13cd
 }
 
 template<typename K, 	typename V> class hasht {
@@ -31,7 +48,11 @@ public:
 
 
 	void AddData(const K& k, const V& value) {
+<<<<<<< HEAD
     size_t cellind = hasher<K>(k);
+=======
+/*    size_t cellind = hasher<K>(k);
+>>>>>>> e3d2477bddb238d4300694837e31b58c858f13cd
 		cellind %= 256;
 		if (m_Storage[cellind] != nullptr){
 			size_t probe = (cellind + 1) % 256;
