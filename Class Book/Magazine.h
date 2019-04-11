@@ -5,9 +5,11 @@
 
 class Magazine : public Book {
 public:
-  Magazine(const char* au, const char* ti, const char* boP, Date& date, const unsigned int& NoP, const char* MT) : Book(au, ti, boP,date, NoP) {
-    MagazinTheme = MT;
+  Magazine(const char* au, const char* ti, const char* boP, Date& date, const unsigned int& NoP, std::string MT) : Book(au, ti, boP,date, NoP) {
+    m_MagazinTheme = MT;
   }
+  std::string getMagazinTheme()const { return m_MagazinTheme; }
+  std::string setMagazinTheme(std::string& MT) { return m_MagazinTheme; }
 private:
-  std::string MagazinTheme;
+  std::string m_MagazinTheme;
 };

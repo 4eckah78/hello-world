@@ -34,10 +34,8 @@ class Book{
 public:
 
   Book();
-  Book(const char* au, const char* ti, const char* boP, Date& date, const unsigned int& NoP);
-  Book(const std::string& au, const std::string& ti, const std::string& boP, Date& date, const unsigned int& NoP);
-  Book(const char* au, const char* ti, const char* boP,const unsigned int& d, const unsigned int& m, const unsigned int& y, const unsigned int& NoP);
-  Book(const std::string& au, const std::string& ti, const std::string& boP, const unsigned int& d, const unsigned int& m, const unsigned int& y, const unsigned int& NoP);
+  Book(const std::string au, const std::string ti, const std::string boP, Date& date, const unsigned int& NoP);
+  Book(const std::string au, const std::string ti, const std::string boP, const unsigned int& d, const unsigned int& m, const unsigned int& y, const unsigned int& NoP);
   ~Book(); 
   
   void getDayMonthYear()const;
@@ -48,10 +46,8 @@ public:
   void setMonthYear(const unsigned int& m, const unsigned int& y);
   void setYear(const unsigned int& y);
 
-  bool serachBookByAuthor(const char* key)const; 
-  bool serachBookByAuthor(const std::string& key)const;
-  bool serachBookByTitle(const char* key)const;
-  bool serachBookByTitle(const std::string& key)const;
+  bool serachBookByAuthor(const std::string key)const;
+  bool serachBookByTitle(const std::string key)const;
 
   bool searchBookByTimeInterval(const Date& da1, const Date& da2)const;
   bool searchBookByTimeInterval(const unsigned int& d1, const unsigned int& m1, const unsigned int& y1, const unsigned int& d2, const unsigned int& m2, const unsigned int& y2)const;
@@ -60,8 +56,7 @@ public:
   bool searchBookByDate(const unsigned int& m, const unsigned int& y)const;
   bool searchBookByDate(const unsigned int& y)const;
 
-  void setBook(const char* au, const char* ti, const char* boP, Date& date, const unsigned int& NoP);
-  void setBook(const std::string& au, const std::string& ti, const std::string& boP, Date& date, const unsigned int& NoP);
+  void setBook(const std::string au, const std::string ti, const std::string boP, Date& date, const unsigned int& NoP);
   Book& operator=(const Book& bo);
 
   std::string getAuthor()const;

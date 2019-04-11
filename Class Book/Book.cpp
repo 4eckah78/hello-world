@@ -115,18 +115,7 @@ Book::Book() {
 }
 
 
-Book::Book(const char* au, const char* ti, const char* boP, Date& date, const unsigned int& NoP) {
-  m_author = au;
-  m_title = ti;
-  m_bookPublishing = boP;
-  m_date.day = date.day;
-  m_date.month = date.month;
-  m_date.year =  date.year;
-  m_numberOfPages = NoP;
-}
-
-
-Book::Book(const std::string& au, const std::string& ti, const std::string& boP, Date& date, const unsigned int& NoP) {
+Book::Book(const std::string au, const std::string ti, const std::string boP, Date& date, const unsigned int& NoP) {
   m_author = au;
   m_title = ti;
   m_bookPublishing = boP;
@@ -137,18 +126,7 @@ Book::Book(const std::string& au, const std::string& ti, const std::string& boP,
 }
 
 
-Book::Book(const char* au, const char* ti, const char* boP, const unsigned int& d, const unsigned int& m, const unsigned int& y, const unsigned int& NoP) {
-  m_author = au;
-  m_title = ti;
-  m_bookPublishing = boP;
-  m_date.day = d;
-  m_date.month = m;
-  m_date.year = y;
-  m_numberOfPages = NoP;
-}
-
-
-Book::Book(const std::string& au, const std::string& ti, const std::string& boP, const unsigned int& d, const unsigned int& m, const unsigned int& y, const unsigned int& NoP) {
+Book::Book(const std::string au, const std::string ti, const std::string boP, const unsigned int& d, const unsigned int& m, const unsigned int& y, const unsigned int& NoP) {
   m_author = au;
   m_title = ti;
   m_bookPublishing = boP;
@@ -162,7 +140,7 @@ Book::Book(const std::string& au, const std::string& ti, const std::string& boP,
 Book::~Book() {}
 
 
-bool Book::serachBookByAuthor(const char* key)const {
+bool Book::serachBookByAuthor(const std::string key)const {
   size_t count = 0;
   while (1) {
     if (int(key[count] == 0))
@@ -184,64 +162,7 @@ bool Book::serachBookByAuthor(const char* key)const {
 }
 
 
-bool Book::serachBookByAuthor(const std::string& key)const {
-  size_t count = 0;
-  while (1) {
-    if (int(key[count] == 0))
-      break;
-    ++count;
-  }
-
-  if (count != m_author.length())
-    return false;
-
-  bool b = true;
-  for (size_t i = 0; i < m_author.length(); ++i)
-    if (key[i] != m_author[i])
-      b = false;
-  if (b)
-    return true;
-  else
-    return false;
-}
-
-
-bool Book::serachBookByTitle(const char* key)const {
-
-  size_t count = 0;
-  while (1) {
-    if (int(key[count] == 0))
-      break;
-    ++count;
-  }
-
-  if (count > m_title.length())
-    return false;
-
-  bool similar = true;
-  char* window = new char[count];
-  for (size_t i = 0; i < count; ++i)
-    window[i] = m_title[i];
-
-  for (size_t k = 0; k < m_title.length() - count + 1; ++k) {
-    for (size_t i = 0; i < count; ++i)
-      if (window[i] != key[i])
-        similar = false;
-    if (similar) {
-      delete[] window;
-      return true;
-    }
-    for (size_t i = 0; i < count - 1; ++i)
-      window[i] = window[i + 1];
-    window[count - 1] = m_title[k + count];
-    similar = true;
-  }
-  delete[] window;
-  return false;
-}
-
-
-bool Book::serachBookByTitle(const std::string& key)const {
+bool Book::serachBookByTitle(const std::string key)const {
   size_t count = 0;
   while (1) {
     if (int(key[count] == 0))
@@ -321,18 +242,7 @@ bool Book::searchBookByDate(const unsigned int& y)const {
 }
 
 
-void Book::setBook(const char* au, const char* ti, const char* boP, Date& date, const unsigned int& NoP) {
-  m_author = au;
-  m_title = ti;
-  m_bookPublishing = boP;
-  m_date.day = date.day;
-  m_date.month = date.month;
-  m_date.year = date.year;
-  m_numberOfPages = NoP;
-}
-
-
-void Book::setBook(const std::string& au, const std::string& ti, const std::string& boP, Date& date, const unsigned int& NoP) {
+void Book::setBook(const std::string au, const std::string ti, const std::string boP, Date& date, const unsigned int& NoP) {
   m_author = au;
   m_title = ti;
   m_bookPublishing = boP;
