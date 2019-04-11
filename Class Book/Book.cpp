@@ -62,9 +62,33 @@ bool operator==(const Date& da1, const Date& da2) {
 
 
 Date operator-(const Date& da1, const Date& da2) {
-  if (da1 >= da2)
-    return Date(da1.day - da2.day, da1.month - da2.month, da1.year - da2.year);
+  if (da1 >= da2) {
+    int DaysInMonths[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+    Date result;
+    result.year = da1.year - da2.year;
+    if (da1.month <= da2.month) {
+      result.year--;
+      result.month = da1.month + 12 - da2.month;
+    }
+    else
+      result.month = da1.month - da2.month;
+    if (da1.day <= da2.day) {
+      if (result.month == 1) {
+        result.year--;
+        result.month = 12;
+        result.day = da1.day + 31 - da2.day;
+      }
+      else {
+        result.day = da1.day + DaysInMonths[result.month - 1] - da2.day;
+        result.month--;
+      }
+    }
+    else
+      result.day = da1.day - da2.day;
+    return result;
+  }
   std::cout << "negative date!!" << std::endl;
+  return 0;
 }
 
 

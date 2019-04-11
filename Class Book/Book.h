@@ -9,17 +9,45 @@ struct Date {
   unsigned int year;
   Date() { day = 0;  month = 0; year = 0; }
   Date(unsigned int d, unsigned int m, unsigned int y) { 
-    day = d; month = m; year = y; 
-    if (d > 31 && m > 12) throw std::invalid_argument("Wrong day or month"); 
+    if (d <= 31 && m <= 12) {
+      day = d; month = m; year = y;
+    }
+     else throw std::invalid_argument("Wrong day or month");
   }
   Date(unsigned int m, unsigned int y) {
-    month = m; year = y; 
-    if (m > 12) throw std::invalid_argument("Wrong day or month");
+    if (m <= 12) { month = m; year = y; }
+    else throw std::invalid_argument("Wrong day or month");
   }
   Date(unsigned int y) { year = y; }
-  Date(const Date& da) {
-    day = da.day, month = da.month, year = da.year;
-    if (da.day > 31 && da.month > 12) throw std::invalid_argument("Wrong day or month");
+  Date(const Date& da) { 
+    if (da.day <= 31 && da.month <= 12)
+    {
+      day = da.day, month = da.month, year = da.year;
+    }
+    else throw std::invalid_argument("Wrong day or month");
+  }
+  void setDate(const unsigned int& Day, const unsigned int& Month, const unsigned int& Year) {
+    if (Day > 31 || Month > 12) 
+      std::cout << "wrong date" << std::endl;
+    else {
+      day = Day;
+      month = Month;
+      year = Year;
+    }
+  };
+  void setDate(const unsigned int& Month, const unsigned int& Year) {
+    if (Month > 12) 
+      std::cout << "wrong date" << std::endl;
+    else {
+      day = 0;
+      month = Month;
+      year = Year;
+    }
+  };
+  void setDate(const unsigned int& Year) {
+    day = 0;
+    month = 0;
+    year = Year;
   }
 };
 
