@@ -1,5 +1,7 @@
 #pragma once
 
+#include "pch.h"
+#include <iostream>
 
 template<typename Data> class Array {
 public:
@@ -55,7 +57,7 @@ public:
   
   void clear();
   void addData(Array a, Data data);
-  size_t getSize()const;
+  size_t Size()const;
   Data getValue(size_t i)const;
   void changeValue(size_t i, Data data);
   void printArray();
@@ -223,7 +225,6 @@ template<typename Data> Array<Data>::Array(const Array &original) {
 }
 
 
-
 template<typename Data> Array<Data>::~Array() {
   clear();
 }
@@ -289,7 +290,7 @@ template<typename Data> void Array<Data>::addData(Array a, Data data) {
 }
 
 
-template<typename Data> size_t Array<Data>::getSize()const {
+template<typename Data> size_t Array<Data>::Size()const {
   return size;
 }
 
@@ -312,7 +313,7 @@ template<typename Data> void Array<Data>::printArray() {
   if (arr)
     for (size_t i = 0; i < size; ++i)
       std::cout << *(arr + i) << " ";
-  else cout << "No array" << endl;
+  else std::cout << "No array" << std::endl;
 }
 
 
@@ -322,12 +323,13 @@ template<typename Data> bool Array<Data>::isVoid()const {
 
 
 template<typename Data> void Array<Data>::deleteElement(size_t i) {
-  ifv(0 <= i && i < size) {
+  if (0 <= i && i < size) {
     for (int j = i; j < size - 1; ++j)
-      *(arr + i) = *(arr + j + 1);
+      *(arr + j) = *(arr + j + 1);
     size--;
   }
-  else throw std::invalid_argument("Index values out of bounds");
+  else 
+    throw std::invalid_argument("Index values out of bounds");
 }
 
 
