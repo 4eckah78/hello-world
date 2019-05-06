@@ -6,6 +6,12 @@
 
 class FormulaNode {
 public:
+  FormulaNode() {
+    m_number = 0;
+    m_oper = 0;
+    m_isOperator = false;
+  }
+  
   FormulaNode(char c) {
     m_number = 0;
     m_oper = c;
@@ -26,14 +32,28 @@ public:
     return m_isOperator;
   }
 
+  void print() {
+    if (!m_isOperator)
+      cout << m_number << " ";
+    else
+      cout << m_oper << " ";
+  }
+
   double value()const {
     if (!m_isOperator)
       return m_number;
     else throw std::logic_error("It's not a number");
   }
 
-  char setOp(char c) {
-    m_oper = c;
+  void setOp(Operators c) {
+    switch (c) {
+    case SUM: m_oper = '+'; break;
+    case SUB: m_oper = '-'; break;
+    case MUL: m_oper = '*'; break;
+    case DIV: m_oper = '/'; break;
+    case OPEN_BRACKET: m_oper = '('; break;
+    case CLOSE_BRACKET: m_oper = ')'; break;
+    }
   }
 
 private:
@@ -45,7 +65,9 @@ private:
 
 template<typename Q> class FormulaParser {
 public:
-  void setResult(Q *q);
+  void setResult(Q *q) {
+    m_qu = q;
+  }
 
   void parse(const char* formula) {
     for (int i = 0; i < formula.size(); ++i) {
@@ -62,8 +84,12 @@ public:
           ch += (formula[i] - '0') * pow(10, counter);
         }
       }
-      FormulaNode o(ch);
-      m_qu.push(o);
+      FormulaNode node;
+      if (formula[i] == '+' || formula[i] == '-' || formula[i] == '*' || formula[i] == '/' || formula[i] == ')' || formula[i] == '(')
+        FormulaNode node(formula[i]);
+      else
+        FormulaNode node(ch);
+      m_qu.push(node);
     }
   }
 
@@ -73,17 +99,24 @@ private:
 
 
 template<typename Q> class DijkstraSorter {
-  void setInput(Q*);
-  void setOutput(Q*);
-  void run();
-private:
+  void setInput(Q*) {
+    m_qu = Q;
+  }
+  void setOutput(Q*) {
+    
+  }
+  void run() {
 
+  }
+private:
+  Q* m_qu;
+  stakk<Operators> m_stack;
 };
 
 
 template<typename Q>  double evaluate(Q&q) {
   while (!q.empty()) {
-
+    
   }
 };
 
@@ -99,7 +132,7 @@ Operators Compare(const Operators& op1, const Operators& op2) {
 }
 
 
-/*void fromBaseToPost(string str) {
+void fromBaseToPost(string str) {
   stakk<Operators> stack;
   qu<FormulaNode> queue;
   for (int i = 0; i < str.size(); ++i) {
@@ -180,4 +213,8 @@ Operators Compare(const Operators& op1, const Operators& op2) {
     queue.push(o);
     stack.pop();
   }
-}*/
+  while (!queue.empty()) {
+    FormulaNode node = queue.getfirst();
+    node.print();
+  }
+}
